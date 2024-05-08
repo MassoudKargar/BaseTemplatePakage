@@ -1,7 +1,7 @@
 {
     "$schema":"http://json.schemastore.org/template",
     "author": "Masoud Kargar",
-    "classifications": [ "Api" ],
+    "classifications": [ "Common", "Solution", "Base" ],
     "identity": "Base.Default.SolutionTemplate.CSharp",
     "name": "Base Default Solution Template",
     "shortName":"basetemplate",
