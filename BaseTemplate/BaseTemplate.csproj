@@ -7,7 +7,7 @@
 		<Authors>Masoud kargar</Authors>
 		<Description>Templates to use when creting an application using base framework.</Description>
 		<TargetFramework>net8.0</TargetFramework>
-		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
+		<RepositoryUrl>https://github.com/MassoudKargar</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>base.png</PackageIcon>
