@@ -6,7 +6,7 @@
 		<Title>Base Solution Templates</Title>
 		<Authors>Masoud kargar</Authors>
 		<Description>Templates to use when creting an application using base framework.</Description>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<RepositoryUrl>https://github.com/MassoudKargar/Base</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
