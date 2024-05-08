@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Base.EndPoints.Web" Version="8.0.2" />
+		<PackageReference Include="Base.Extensions.Caching.Distributed.Sql" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Caching.InMemory" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Events.PollingPublisher" Version="8.0.1" />
+		<PackageReference Include="Base.Extensions.Events.PollingPublisher.Dal.Dapper" Version="8.0.1" />
+		<PackageReference Include="Base.Extensions.MessageBus.RabbitMQ" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.ObjectMappers.AutoMapper" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.Translations.Parrot" Version="8.0.0" />
+		<PackageReference Include="Base.Extensions.UsersManagement" Version="8.0.0" />
+		<PackageReference Include="Base.Utility.SoftwarePartsDetector" Version="8.0.0" />
+		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.0.0" />
+		<PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.ApplicationService\BaseTemplate.Core.ApplicationService.csproj" />
+	  <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.Contracts\BaseTemplate.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.Domain\BaseTemplate.Core.Domain.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\Data\BaseTemplate.Infra.Data.Sql.Commands\BaseTemplate.Infra.Data.Sql.Commands.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\Data\BaseTemplate.Infra.Data.Sql.Queries\BaseTemplate.Infra.Data.Sql.Queries.csproj" />
+	</ItemGroup>
+
+</Project>

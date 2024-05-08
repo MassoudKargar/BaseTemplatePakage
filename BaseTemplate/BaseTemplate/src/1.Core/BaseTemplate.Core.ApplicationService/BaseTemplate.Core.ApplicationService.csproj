@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+		<PropertyGroup>
+				<TargetFramework>net8.0</TargetFramework>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<Nullable>enable</Nullable>
+		</PropertyGroup>
+
+		<ItemGroup>
+				<PackageReference Include="Base.Core.ApplicationServices" Version="8.0.1" />
+		</ItemGroup>
+
+		<ItemGroup>
+				<ProjectReference Include="..\BaseTemplate.Core.Contracts\BaseTemplate.Core.Contracts.csproj" />
+				<ProjectReference Include="..\BaseTemplate.Core.Domain\BaseTemplate.Core.Domain.csproj" />
+				<ProjectReference Include="..\BaseTemplate.Core.RequestResponse\BaseTemplate.Core.RequestResponse.csproj" />
+		</ItemGroup>
+
+</Project>

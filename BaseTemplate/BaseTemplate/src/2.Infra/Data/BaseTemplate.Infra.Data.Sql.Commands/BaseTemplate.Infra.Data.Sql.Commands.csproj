@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Base.Extensions.Events.Outbox.Dal.EF" Version="8.0.0" />
+		<PackageReference Include="Base.Infra.Data.Sql.Commands" Version="8.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\1.Core\BaseTemplate.Core.Contracts\BaseTemplate.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\..\1.Core\BaseTemplate.Core.Domain\BaseTemplate.Core.Domain.csproj" />
+	</ItemGroup>
+
+</Project>
