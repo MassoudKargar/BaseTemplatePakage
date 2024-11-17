@@ -28,7 +28,7 @@
 		<PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.UsersManagement" Version="8.0.0" />
 		<PackageReference Include="Base.Utility.SoftwarePartsDetector" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.2.0" />
+		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.0.0" />
 		<PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="8.0.0" />
 	</ItemGroup>
 
