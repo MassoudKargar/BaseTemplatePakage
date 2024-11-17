@@ -1,15 +1,4 @@
-﻿using Base.EndPoints.Web.Controllers;
+﻿namespace BaseTemplate.Endpoints.API.People;
 
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace BaseTemplate.Endpoints.API.People
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class People : BaseController
-    {
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreatePerson() => Ok();
-    }
-}
+public class PeopleController(IGenericService<Person, long> personRepository, ILogger<PeopleController> logger)
+    : GenericController<Person, long, PersonListViewModel, PersonUpdateViewModel, PersonUpdateValidator, PersonInsertViewModel, PersonInsertValidator, PersonSelectViewModel>(personRepository, logger);

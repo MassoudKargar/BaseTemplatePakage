@@ -1,0 +1,26 @@
+services:
+  basetemplate.endpoints.api:
+    image: ${DOCKER_REGISTRY-}basetemplateendpointsapi:3
+    build:
+      context: .
+      dockerfile: src/3.Endpoints/BaseTemplate.Endpoints.API/Dockerfile
+    depends_on:
+     - mssql
+
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2022-CU14-ubuntu-22.04
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: 'Str0ngP@ssw0rd!'
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_PID: 'Developer'
+      MSSQL_TCP_PORT: 1433
+    ports:       
+      - "1433:1433"
+    volumes:
+     - ./data:/var/opt/mssql/data
+     - ./log:/var/opt/mssql/log
+     - ./secrets:/var/opt/mssql/secrets
+     - ./backup:/var/opt/mssql/backup
+   

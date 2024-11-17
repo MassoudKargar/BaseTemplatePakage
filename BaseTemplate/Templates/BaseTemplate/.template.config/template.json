@@ -4,7 +4,7 @@
     "classifications": [ "Common", "Solution", "Base" ],
     "identity": "Base.Default.SolutionTemplate.CSharp",
     "name": "Base Default Solution Template",
-    "shortName":"basetemplate",
+    "shortName":"basetemplate_work",
     "sourceName": "BaseTemplate",
     "preferNameDirectory": true,
     "tags": {"language": "C#","type": "project"}
