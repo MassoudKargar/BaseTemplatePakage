@@ -1,6 +1,6 @@
 services:
   basetemplate.endpoints.api:
-    image: ${DOCKER_REGISTRY-}basetemplateendpointsapi:3
+    image: ${DOCKER_REGISTRY-}basetemplateendpointsapi:4
     build:
       context: .
       dockerfile: src/3.Endpoints/BaseTemplate.Endpoints.API/Dockerfile

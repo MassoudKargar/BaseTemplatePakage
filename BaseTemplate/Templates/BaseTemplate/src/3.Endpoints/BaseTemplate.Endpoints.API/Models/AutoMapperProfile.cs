@@ -1,4 +1,6 @@
-﻿namespace BaseTemplate.Endpoints.API.Models;
+﻿using BaseTemplate.Core.ApplicationService.People.ViewModels;
+
+namespace BaseTemplate.Endpoints.API.Models;
 
 public class AutoMapperProfile : Profile
 {

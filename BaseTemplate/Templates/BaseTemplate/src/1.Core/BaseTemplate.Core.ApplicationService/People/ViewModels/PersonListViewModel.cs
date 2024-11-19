@@ -1,4 +1,4 @@
-﻿namespace BaseTemplate.Core.Contracts.People.ViewModels;
+﻿namespace BaseTemplate.Core.ApplicationService.People.ViewModels;
 
 public class PersonListViewModel
 {

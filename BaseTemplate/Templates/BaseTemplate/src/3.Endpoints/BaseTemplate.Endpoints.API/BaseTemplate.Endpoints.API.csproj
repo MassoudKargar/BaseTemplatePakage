@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Base.EndPoints.Web" Version="8.3.2" />
+		<PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="8.1.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
 			<PrivateAssets>all</PrivateAssets>
@@ -28,11 +29,10 @@
 		<PackageReference Include="Base.Extensions.Serializers.Microsoft" Version="8.0.0" />
 		<PackageReference Include="Base.Extensions.UsersManagement" Version="8.0.0" />
 		<PackageReference Include="Base.Utility.SoftwarePartsDetector" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.SerilogRegistration" Version="8.0.0" />
-		<PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.ApplicationService\BaseTemplate.Core.ApplicationService.csproj" />
 	  <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.Contracts\BaseTemplate.Core.Contracts.csproj" />
 	  <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.Domain\BaseTemplate.Core.Domain.csproj" />
 	  <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.RequestResponse\BaseTemplate.Core.RequestResponse.csproj" />

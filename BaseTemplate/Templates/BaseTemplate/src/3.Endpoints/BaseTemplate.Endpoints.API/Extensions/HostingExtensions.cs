@@ -20,7 +20,16 @@ public static class HostingExtensions
             {
                 optionsBuilder.MigrationsAssembly(typeof(BaseTemplateDbContext).Assembly.GetName().Name);
             }));
-
+        builder.Services.AddBaseObservabilitySupport(c =>
+        {
+            c.ApplicationName = "Base";
+            c.ServiceName = "BaseTemplate";
+            c.ServiceVersion = "1.0.0";
+            c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
+            c.OltpEndpoint = "http://localhost:4317";
+            c.ExportProcessorType = OpenTelemetry.ExportProcessorType.Simple;
+            c.SamplingProbability = 1;
+        });
         builder.Services.AddSwaggerGen();
 
         return builder.Build();
@@ -29,12 +38,11 @@ public static class HostingExtensions
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
         app.UseCustomExceptionHandler();
-        app.UseSerilogRequestLogging();
-        if (app.Environment.IsDevelopment())
-        {
+        //if (app.Environment.IsDevelopment())
+        //{
             app.UseSwagger();
             app.UseSwaggerUI();
-        }
+        //}
         app.UseStatusCodePages();
         app.UseStaticFiles();
         app.UseCors(delegate (CorsPolicyBuilder builder)
