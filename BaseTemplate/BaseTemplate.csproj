@@ -1,28 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<PackageType>Template</PackageType>
-		<PackageVersion>8.0.3</PackageVersion>
-		<PackageId>Base.Solution.Templates</PackageId>
-		<Title>Base Solution Templates</Title>
-		<Authors>Masoud kargar</Authors>
-		<Description>Templates to use when creting an application using base framework.</Description>
-		<TargetFramework>net8.0</TargetFramework>
-		<RepositoryUrl>https://github.com/MassoudKargar</RepositoryUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageIcon>base.png</PackageIcon>
-
-		<IncludeContentInPack>true</IncludeContentInPack>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<ContentTargetFolders>content</ContentTargetFolders>
-	</PropertyGroup>
-	<ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath="" />
-		<None Include="base.png" Pack="true" PackagePath="" />
-	</ItemGroup>
-	<ItemGroup>
-		<Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
-		<Compile Remove="**\*"/>
-	</ItemGroup>
-
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+	  <Version>9.0.0</Version>
+    <PackageId>Base.Solution.Templates</PackageId>
+    <Title>Base Solution Templates</Title>
+    <Authors>Masoud kargar</Authors>
+    <Description>Templates to use when creting an application using base framework.</Description>
+    <TargetFramework>net9.0</TargetFramework>
+    <RepositoryUrl>https://github.com/MassoudKargar</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>base.png</PackageIcon>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="base.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
 </Project>

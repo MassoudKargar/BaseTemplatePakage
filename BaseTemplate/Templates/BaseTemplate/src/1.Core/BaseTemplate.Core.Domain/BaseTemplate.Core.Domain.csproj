@@ -1,18 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-		<PropertyGroup>
-				<TargetFramework>net8.0</TargetFramework>
-				<ImplicitUsings>enable</ImplicitUsings>
-				<Nullable>enable</Nullable>
-		</PropertyGroup>
-
-		<ItemGroup>
-				<PackageReference Include="Base.Core.Domains" Version="8.0.1" />
-				<PackageReference Include="Base.Core.Domains.Toolkits" Version="8.0.1" />
-		</ItemGroup>
-
-		<ItemGroup>
-		  <ProjectReference Include="..\BaseTemplate.Core.Resources\BaseTemplate.Core.Resources.csproj" />
-		</ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Base.Core.Domains" Version="9.0.0" />
+    <PackageReference Include="Base.Core.Domains.Toolkits" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseTemplate.Core.Resources\BaseTemplate.Core.Resources.csproj" />
+  </ItemGroup>
 </Project>
