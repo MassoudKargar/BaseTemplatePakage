@@ -1,75 +1,40 @@
 {
-    "$schema":"http://json.schemastore.org/template",
-    "author": "Masoud Kargar",
-    "classifications": [ "Common", "Solution", "Base" ],
-    "identity": "Base.Default.SolutionTemplate.CSharp",
-    "name": "Base Default Solution Template",
-    "shortName":"basetemplate",
-    "sourceName": "BaseTemplate",
-    "preferNameDirectory": false,
-    "tags": {"language": "C#","type": "solution"},
-    "symbols": {
-        "Framework": {
-            "type": "parameter",
-            "description": "The target framework for the project.",
-            "datatype": "choice",
-            "choices": [
-                {
-                    "choice": "net8.0",
-                    "description": "Target net8.0"
-                }
-            ],
-            "defaultValue": "net8.0"
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Masoud Kargar",
+  "classifications": [ "Common", "Solution", "Base" ],
+  "identity": "Base.SolutionTemplate.CSharp",
+  "name": "Base Solution Template",
+  "shortName": "basetemplate",
+  "sourceName": "BaseTemplate",
+  "preferNameDirectory": false,
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**"
+      ],
+      "modifiers": [
+        {
+          "condition": "(HostIdentifier != \"dotnetcli\" || HostIdentifier != \"dotnetcli-preview\")",
+          "exclude": [
+            "**/*.user",
+            "**/*.lock.json",
+            "**/launchSettings.json"
+          ]
         }
-    },
-    "sources": [
-        {
-            "source": "./",
-            "target": "./",
-            "exclude": [
-                "**/[Bb]in/**",
-                "**/[Oo]bj/**",
-                ".template.config/**"
-            ],
-            "modifiers": [
-                {
-                    "condition": "(HostIdentifier != \"dotnetcli\" || HostIdentifier != \"dotnetcli-preview\")",
-                    "exclude": [
-                        "**/*.user",
-                        "**/*.lock.json",
-                        "**/launchSettings.json"
-                    ]
-                }
-            ]
-        }
-    ],
-    "primaryOutputs": [
-        {
-            "path": "BaseTemplate.sln"
-        },
-        {
-            "path": "src/1.Core/BaseTemplate.Core.Domain/BaseTemplate.Core.Domain.csproj"
-        },
-        {
-            "path": "src/1.Core/BaseTemplate.Core.Contracts/BaseTemplate.Core.Contracts.csproj"
-        },
-        {
-            "path": "src/1.Core/BaseTemplate.Core.ApplicationService/BaseTemplate.Core.ApplicationService.csproj"
-        },
-        {
-            "path": "src/1.Core/BaseTemplate.Core.RequestResponse/BaseTemplate.Core.RequestResponse.csproj"
-        },
-        {
-            "path": "src/1.Core/BaseTemplate.Core.Resources/BaseTemplate.Core.Resources.csproj"
-        },
-        {
-            "path": "src/2.Infra/Data/BaseTemplate.Infra.Data.Sql.Commands/BaseTemplate.Infra.Data.Sql.Commands.csproj"
-        },
-        {
-            "path": "src/2.Infra/Data/BaseTemplate.Infra.Data.Sql.Queries/BaseTemplate.Infra.Data.Sql.Queries.csproj"
-        },
-        {
-            "path": "src/3.Endpoints/BaseTemplate.Endpoints.API/BaseTemplate.Endpoints.API.csproj"
-        }
-    ]
+      ]
+    }
+  ],
+  "primaryOutputs": [
+    {
+      "path": "BaseTemplate.sln"
+    }
+  ]
 }
