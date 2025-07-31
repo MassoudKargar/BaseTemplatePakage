@@ -1,10 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Base.Extensions.Events.Outbox.Dal.EF;
+﻿namespace BaseTemplate.Infra.Data.Sql.Commands.Common;
 
-namespace BaseTemplate.Infra.Data.Sql.Commands.Common;
-
-public class DbContextNameCommandDbContext(DbContextOptions<DbContextNameCommandDbContext> options) : BaseOutboxCommandDbContext(options)
+public class BaseTemplateCommandDbContext(DbContextOptions<BaseTemplateCommandDbContext> options) : BaseOutboxCommandDbContext(options)
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
