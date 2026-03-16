@@ -15,7 +15,22 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+
+
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="Scalar.AspNetCore" Version="2.12.48" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
+
     <PackageReference Include="Base.Extensions.Caching.Distributed.Sql" Version="9.0.0" />
     <PackageReference Include="Base.Extensions.Caching.InMemory" Version="9.0.0" />
     <PackageReference Include="Base.Extensions.Events.PollingPublisher" Version="9.0.0" />
@@ -28,7 +43,7 @@
     <PackageReference Include="Base.Extensions.Translations.Parrot" Version="9.0.0" />
     <PackageReference Include="Base.Extensions.UsersManagement" Version="9.0.0" />
     <PackageReference Include="Base.Utility.SoftwarePartsDetector" Version="9.0.0" />
-    <PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="9.0.0" />
+    <PackageReference Include="Base.Utility.OpenTelemetryRegistration" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.ApplicationService\BaseTemplate.Core.ApplicationService.csproj" />

@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Base.Infra.Data.Sql.Queries" Version="9.0.0" />
+    <PackageReference Include="Base.Infra.Data.Sql.Queries" Version="9.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\1.Core\BaseTemplate.Core.Contracts\BaseTemplate.Core.Contracts.csproj" />
