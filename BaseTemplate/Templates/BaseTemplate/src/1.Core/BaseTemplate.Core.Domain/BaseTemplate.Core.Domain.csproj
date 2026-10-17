@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Base.Core.Domains" Version="9.0.1" />
-    <PackageReference Include="Base.Core.Domains.Toolkits" Version="9.0.0" />
+    <PackageReference Include="Base.Core.Domains" Version="10.0.0" />
+    <PackageReference Include="Base.Core.Domains.Toolkits" Version="10.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseTemplate.Core.Resources\BaseTemplate.Core.Resources.csproj" />

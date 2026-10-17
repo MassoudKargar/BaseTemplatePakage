@@ -1,6 +1,4 @@
-﻿using Base.Core.ApplicationServices.Events;
-
-namespace BaseTemplate.Endpoints.API.CustomDecorators;
+﻿namespace BaseTemplate.Endpoints.API.CustomDecorators;
 
 public class CustomEventDecorator : EventDispatcherDecorator
 {

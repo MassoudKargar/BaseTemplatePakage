@@ -1,4 +1,4 @@
-﻿using BaseTemplate.Endpoints.API.Extensions.DependencyInjection.IdentityServer.Options;
+using BaseTemplate.Endpoints.API.Extensions.DependencyInjection.IdentityServer.Options;
 
 namespace BaseTemplate.Endpoints.API.Extensions.DependencyInjection.IdentityServer.Extensions;
 
@@ -10,13 +10,13 @@ public static class IdentityServerServiceExtension
 
         if (oAuthOption is { Enabled: true })
         {
+            services.AddAuthorization();
             services.AddAuthentication()
                 .AddJwtBearer(o =>
                 {
                     o.Authority = oAuthOption.Authority;
                     o.Audience = oAuthOption.Audience;
                     o.RequireHttpsMetadata = oAuthOption.RequireHttpsMetadata;
-                    o.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
                     o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
                     {
                         ValidateAudience = oAuthOption.ValidateAudience,

@@ -1,6 +1,8 @@
-﻿namespace BaseTemplate.Infra.Data.Sql.Commands.Common;
+﻿using Base.Infra.Data.Sql.Commands;
 
-public class BaseTemplateCommandDbContext(DbContextOptions<BaseTemplateCommandDbContext> options) : BaseOutboxCommandDbContext(options)
+namespace BaseTemplate.Infra.Data.Sql.Commands.Common;
+
+public class BaseTemplateCommandDbContext(DbContextOptions<BaseTemplateCommandDbContext> options) : BaseCommandDbContext(options)
 {
 
     protected override Assembly ConfigurationsAssembly => Assembly.GetExecutingAssembly();

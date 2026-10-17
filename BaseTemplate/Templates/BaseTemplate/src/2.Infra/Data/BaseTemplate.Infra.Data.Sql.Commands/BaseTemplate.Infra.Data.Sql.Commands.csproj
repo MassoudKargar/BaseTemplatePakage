@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Base.Extensions.Events.Outbox.Dal.EF" Version="9.0.0" />
-    <PackageReference Include="Base.Infra.Data.Sql.Commands" Version="9.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.5" />
+    <PackageReference Include="Base.Extensions.Events.Outbox.Dal.EF" Version="10.0.0" />
+    <PackageReference Include="Base.Infra.Data.Sql.Commands" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\1.Core\BaseTemplate.Core.Contracts\BaseTemplate.Core.Contracts.csproj" />

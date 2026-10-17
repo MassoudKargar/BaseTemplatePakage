@@ -1,16 +1,3 @@
-﻿using Base.Core.ApplicationServices.Commands;
-using Base.Core.ApplicationServices.Events;
-using Base.Core.ApplicationServices.Queries;
-
-using BaseTemplate.Endpoints.API.CustomDecorators;
-using BaseTemplate.Endpoints.API.Extensions.DependencyInjection.IdentityServer.Extensions;
-
-using FluentValidation.AspNetCore;
-
-using Microsoft.OpenApi;
-
-using Scalar.AspNetCore;
-
 namespace BaseTemplate.Endpoints.API.Extensions;
 
 public static class HostingExtensions
@@ -18,6 +5,7 @@ public static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         IConfiguration configuration = builder.Configuration;
+        builder.AddObservability();
         builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
         builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
         builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
@@ -31,48 +19,33 @@ public static class HostingExtensions
         {
             option.AssemblyNamesForLoadProfiles = "BaseTemplate";
         });
-
         builder.Services.AddBaseInMemoryCaching();
+
         builder.Services.AddDbContext<BaseTemplateCommandDbContext>(c => c
             .UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString"))
             .AddInterceptors(new SetPersianYeKeInterceptor(), new AddAuditDataInterceptor()));
         builder.Services.AddDbContext<BaseTemplateQueryDbContext>(c =>
             c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
         builder.Services.AddScoped<BaseTemplateCommandDbContextFactory>();
-        builder.Services.AddBasePollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
-        builder.Services.AddBaseMessageInboxDalSql(configuration, "MessageInboxSqlStore");
-        builder.Services.AddIdentityServer(configuration, "OAuth");
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-        // Register only OpenAPI (no Swashbuckle/Swagger services)
-        builder.Services.AddOpenApi(options =>
-        {
-            options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_0;
-        });
 
+        builder.Services.AddIdentityServer(configuration, "OAuth");
+
+        builder.Services.AddOpenApiDocumentation(configuration, "OpenApi");
         return builder.Build();
     }
 
-    public static WebApplication ConfigurePipeline(this WebApplication app)
+    public static WebApplication ConfigurePipeline(this WebApplication app, string[] args)
     {
+        var runMigrations = args.Contains("--migrate");
+        if (runMigrations)
+        {
+            using var scope = app.Services.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<BaseTemplateCommandDbContext>();
+            db.Database.Migrate();
+        }
         app.UseBaseObservabilityMiddleware();
         app.UseBaseApiExceptionHandler();
-
-        if (app.Environment.IsDevelopment())
-        {
-            app.MapOpenApi();
-            // Use OpenAPI-only tooling in development. Do not enable Swashbuckle/Swagger middleware.
-            // map scalar API reference UI to /scalar
-            app.MapScalarApiReference(options =>
-            {
-                options.WithTitle("Medication Schedule API")
-                    .WithTheme(ScalarTheme.DeepSpace)
-                    .ShowOperationId()
-                    .ExpandAllTags()
-                    .SortTagsAlphabetically()
-                    .SortOperationsByMethod()
-                    .PreserveSchemaPropertyOrder();
-            });
-        }
+        app.UseOpenApiDocumentation("OpenApi");
         app.UseStatusCodePages();
         app.UseCors(delegate (CorsPolicyBuilder builder)
         {
@@ -81,18 +54,8 @@ public static class HostingExtensions
             builder.AllowAnyMethod();
         });
         app.UseHttpsRedirection();
-        app.UseAuthentication();
-
-        var useIdentityServer = app.UseIdentityServer("OAuth");
-
-        if (useIdentityServer)
-        {
-            app.MapControllers().RequireAuthorization();
-        }
-        else
-        {
-            app.MapControllers();
-        }
+        app.UseIdentityServer("OAuth");
+        app.MapControllers();
         return app;
     }
 }
