@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BaseTemplate.Infra.Data.Sql.Commands.Migrations
+namespace BaseTemplate.Infrastructure.Data.Sql.Commands.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration

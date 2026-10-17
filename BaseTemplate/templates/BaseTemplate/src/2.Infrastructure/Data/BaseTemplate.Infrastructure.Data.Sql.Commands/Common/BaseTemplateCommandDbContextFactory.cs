@@ -1,4 +1,4 @@
-﻿namespace BaseTemplate.Infra.Data.Sql.Commands.Common;
+namespace BaseTemplate.Infrastructure.Data.Sql.Commands.Common;
 
 public class BaseTemplateCommandDbContextFactory : IDesignTimeDbContextFactory<BaseTemplateCommandDbContext>
 {

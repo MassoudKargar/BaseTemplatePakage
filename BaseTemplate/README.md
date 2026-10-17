@@ -1,6 +1,6 @@
 # Base Solution Templates
 
-A .NET 10 solution template using the Base framework, with Core, SQL command/query infrastructure, and an ASP.NET Core API.
+A .NET 10 solution template using the Base framework, with Core, SQL command/query projects under `src/2.Infrastructure`, and an ASP.NET Core API.
 
 ## Install and generate
 
@@ -16,4 +16,4 @@ Configure SQL Server, OAuth, and observability settings before running the API. 
 
 The template does not contain automated test projects. Building a generated application verifies compilation, not external-service connectivity.
 
-API documentation uses native OpenAPI at `/openapi/v1.json` and Scalar at `/scalar`. Configure the `OpenApi` section for title, Bearer/OAuth2, public client ID, PKCE, and custom routes. `SwaggerDoc` settings remain supported for existing applications. Swashbuckle is not required by generated projects.
+API documentation uses native OpenAPI at `/openapi/v1.json` and Scalar at `/scalar`. Configure the `OpenApi` section for title, Bearer/OAuth2, public client ID, PKCE, and custom routes. No Swagger or Swashbuckle package is used by generated projects.

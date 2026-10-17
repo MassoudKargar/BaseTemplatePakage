@@ -14,7 +14,7 @@ solution template under `BaseTemplate/templates/BaseTemplate`.
 - `BaseTemplate/BaseTemplate.csproj`: template package project. It includes all files under `templates/**` except `bin` and `obj`.
 - `BaseTemplate/templates/BaseTemplate/BaseTemplate.sln`: the solution emitted by the template.
 - `BaseTemplate/templates/BaseTemplate/src/1.Core`: domain, contracts, application service, request/response, and resource projects.
-- `BaseTemplate/templates/BaseTemplate/src/2.Infra`: SQL command/query infrastructure projects.
+- `BaseTemplate/templates/BaseTemplate/src/2.Infrastructure`: SQL command/query infrastructure projects.
 - `BaseTemplate/templates/BaseTemplate/src/3.Endpoints`: ASP.NET Core API endpoint project.
 - `nupkgs/`: generated NuGet packages. Treat as build output unless the user explicitly asks to inspect package artifacts.
 
@@ -42,28 +42,28 @@ them in the nested template solution and include them in
 - The package project currently targets `net10.0`.
 - The nested template projects currently target `net10.0`.
 - The template uses the `Base.*` framework packages, Entity Framework Core,
-  ASP.NET Core, SQL Server, OpenAPI/Scalar/Swashbuckle, FluentValidation, and
-  OpenTelemetry registration packages.
+  ASP.NET Core, SQL Server, native OpenAPI/Scalar, MediatR, and
+  the packages built from the BaseDotNet10 branch in C:\Base\sec.
 - There is no `global.json`; use the installed SDK that can build the target
   frameworks unless the user asks to pin one.
 
 ## Coding Conventions
 
 - Preserve the layered structure: Core projects should not depend on Endpoint or
-  Infra projects; Endpoint composes services and infrastructure.
+  Infrastructure projects; Endpoint composes services and infrastructure.
 - Keep namespaces aligned with the project and folder names, using
   `BaseTemplate.*` for template code.
 - Prefer file-scoped namespaces, global usings, and primary constructors where
   the existing code already uses them.
 - Register cross-cutting services in
   `src/3.Endpoints/BaseTemplate.Endpoints.API/Extensions/HostingExtensions.cs`.
-- Keep dispatcher customizations in
-  `src/3.Endpoints/BaseTemplate.Endpoints.API/CustomDecorators`.
+- Keep MediatR pipeline customizations in
+  `src/3.Endpoints/BaseTemplate.Endpoints.API/Extensions/RequestLoggingBehavior.cs`.
 - Keep EF Core command-side context, unit of work, schemas, factories, and
   migrations under
-  `src/2.Infra/Data/BaseTemplate.Infra.Data.Sql.Commands`.
+  `src/2.Infrastructure/Data/BaseTemplate.Infrastructure.Data.Sql.Commands`.
 - Keep query-side DbContext code under
-  `src/2.Infra/Data/BaseTemplate.Infra.Data.Sql.Queries`.
+  `src/2.Infrastructure/Data/BaseTemplate.Infrastructure.Data.Sql.Queries`.
 
 ## Template-Specific Rules
 
@@ -86,5 +86,5 @@ them in the nested template solution and include them in
   defaults.
 - The `--migrate` runtime argument triggers EF Core migration execution in the
   API startup pipeline.
-- OAuth, OpenAPI, RabbitMQ, translator, outbox/inbox, and OpenTelemetry settings
+- OAuth and OpenAPI settings
   are configured through the endpoint project's `appsettings*.json` files.
