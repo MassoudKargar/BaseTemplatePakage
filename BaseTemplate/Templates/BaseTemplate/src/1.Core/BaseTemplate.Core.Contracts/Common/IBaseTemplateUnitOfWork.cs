@@ -1,7 +1,5 @@
-﻿using Base.Core.Contracts.Data.Commands;
+using Base.Core.Domains.Contracts.UnitOfWorks;
 
 namespace BaseTemplate.Core.Contracts.Common;
 
-public interface IBaseTemplateUnitOfWork : IUnitOfWork
-{
-}
+public interface IBaseTemplateUnitOfWork : IUnitOfWork;

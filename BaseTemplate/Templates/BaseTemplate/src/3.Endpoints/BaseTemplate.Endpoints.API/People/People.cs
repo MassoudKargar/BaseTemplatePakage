@@ -1,15 +1,12 @@
-﻿using Base.EndPoints.Web.Controllers;
-
-using Microsoft.AspNetCore.Http;
+using Base.EndPoints.Web.Controllers;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BaseTemplate.Endpoints.API.People
+namespace BaseTemplate.Endpoints.API.People;
+
+[Route("api/[controller]")]
+public class People(IMediator mediator) : BaseController(mediator)
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class People : BaseController
-    {
-        [HttpPost("Create")]
-        public async Task<IActionResult> CreatePerson() => Ok();
-    }
+    [HttpPost("Create")]
+    public IActionResult CreatePerson() => Ok();
 }

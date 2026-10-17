@@ -4,55 +4,40 @@ public static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        IConfiguration configuration = builder.Configuration;
-        builder.AddObservability();
-        builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
-        builder.Services.AddSingleton<QueryDispatcherDecorator, CustomQueryDecorator>();
-        builder.Services.AddSingleton<EventDispatcherDecorator, CustomEventDecorator>();
-        builder.Services.AddBaseApiCore("Base", "BaseTemplate");
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddBaseWebUserInfoService(configuration, "WebUserInfo", true);
-        builder.Services.AddBaseParrotTranslator(configuration, "ParrotTranslator");
-        builder.Services.AddFluentValidationAutoValidation();
-        builder.Services.AddBaseMicrosoftSerializer();
-        builder.Services.AddBaseAutoMapperProfiles(option =>
-        {
-            option.AssemblyNamesForLoadProfiles = "BaseTemplate";
-        });
-        builder.Services.AddBaseInMemoryCaching();
-
-        builder.Services.AddDbContext<BaseTemplateCommandDbContext>(c => c
-            .UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString"))
-            .AddInterceptors(new SetPersianYeKeInterceptor(), new AddAuditDataInterceptor()));
-        builder.Services.AddDbContext<BaseTemplateQueryDbContext>(c =>
-            c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
+        var configuration = builder.Configuration;
+        builder.Services.AddControllers();
+        builder.Services.AddAuthorization();
+        builder.Services.AddCors();
+        builder.Services.AddDefaultFrameworkServices(configuration);
+        builder.Services.AddClock();
+        builder.Services.AddMediatRServices(typeof(HostingExtensions).Assembly,
+            typeof(IBaseTemplateUnitOfWork).Assembly,
+            typeof(BaseTemplate.Core.ApplicationService.AssemblyMarker).Assembly);
+        builder.Services.AddTransient(typeof(MediatR.IPipelineBehavior<,>), typeof(RequestLoggingBehavior<,>));
+        builder.Services.AddDbContext<BaseTemplateCommandDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString")).AddPersianYeKeCommandInterceptor());
+        builder.Services.AddDbContext<BaseTemplateQueryDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
+        builder.Services.AddScoped<DbContext>(services => services.GetRequiredService<BaseTemplateCommandDbContext>());
+        builder.Services.AddScoped<BaseTemplateUnitOfWork>();
+        builder.Services.AddScoped<IBaseTemplateUnitOfWork>(services => services.GetRequiredService<BaseTemplateUnitOfWork>());
+        builder.Services.AddScoped<IUnitOfWork>(services => services.GetRequiredService<BaseTemplateUnitOfWork>());
         builder.Services.AddScoped<BaseTemplateCommandDbContextFactory>();
-
         builder.Services.AddIdentityServer(configuration, "OAuth");
-
-        builder.Services.AddOpenApiDocumentation(configuration, "OpenApi");
         return builder.Build();
     }
 
     public static WebApplication ConfigurePipeline(this WebApplication app, string[] args)
     {
-        var runMigrations = args.Contains("--migrate");
-        if (runMigrations)
+        if (args.Contains("--migrate"))
         {
             using var scope = app.Services.CreateScope();
-            var db = scope.ServiceProvider.GetRequiredService<BaseTemplateCommandDbContext>();
-            db.Database.Migrate();
+            scope.ServiceProvider.GetRequiredService<BaseTemplateCommandDbContext>().Database.Migrate();
         }
-        app.UseBaseObservabilityMiddleware();
-        app.UseBaseApiExceptionHandler();
+        app.UseExceptionAdapter();
         app.UseOpenApiDocumentation("OpenApi");
         app.UseStatusCodePages();
-        app.UseCors(delegate (CorsPolicyBuilder builder)
-        {
-            builder.AllowAnyOrigin();
-            builder.AllowAnyHeader();
-            builder.AllowAnyMethod();
-        });
+        app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         app.UseHttpsRedirection();
         app.UseIdentityServer("OAuth");
         app.MapControllers();
