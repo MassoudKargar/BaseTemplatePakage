@@ -35,4 +35,3 @@ SHA256 بسته: `9569F02A9475C1398C8A443E8DCE4496CB09F180EA6C0DBF05D36BA77662CB
 
 NuGet.Config در ریشهٔ مخزن اضافه شد: Source Mapping برای Base.* به C:\Base\artifacts\branch-nuget و کش ثابت و مستقل artifacts/current-base-packages. سایر وابستگی‌ها از nuget.org دریافت می‌شوند. تنظیمات عمومی NuGet دست‌کاری نشدند. این فایل خارج از محتوای Template است و در بستهٔ نهایی وجود ندارد.
 
-Build مستقیم همین مسیر در Debug و Release با صفر خطا موفق شد. گزارش‌ها در artifacts/validation-results/direct-build-after.log و direct-build-release.log هستند. هشدارهای امنیتی Pkcs همچنان وجود دارند؛ تعداد هشدارها در خروجی Restore+Build تکرار می‌شود. کش ثابت توسعه برای Build و Visual Studio نگهداری شده است؛ پوشهٔ موقت هر تست نیست.
