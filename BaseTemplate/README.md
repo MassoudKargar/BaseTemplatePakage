@@ -5,7 +5,7 @@ A .NET 10 solution template using the Base framework, with Core, SQL command/que
 ## Install and generate
 
 ```powershell
-dotnet new install Base.Solution.Templates::10.1.0
+dotnet new install Base.Solution.Templates::10.2.0
 dotnet new basetemplate -n MyApplication -o MyApplication
 dotnet build MyApplication/MyApplication.sln
 ```
