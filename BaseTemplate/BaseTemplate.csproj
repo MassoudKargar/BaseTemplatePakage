@@ -23,11 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**;templates\**\.vs\**;templates\**\.idea\**;templates\**\*.user;templates\**\*.suo" />
-    <!-- Older tracked files use Templates; merge them into the same package path on case-sensitive hosts. -->
-    <Content Include="Templates\**\*"
-             Condition="'$(OS)' != 'Windows_NT'"
-             Exclude="Templates\**\bin\**;Templates\**\obj\**;Templates\**\.vs\**;Templates\**\.idea\**;Templates\**\*.user;Templates\**\*.suo"
-             PackagePath="content/templates/%(RecursiveDir)%(Filename)%(Extension)" />
     <Compile Remove="**\*" />
   </ItemGroup>
 </Project>

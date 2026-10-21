@@ -1,16 +1,14 @@
 [CmdletBinding()]
-param([string]$BasePackageDirectory, [string]$Configuration = 'Release', [string]$OutputDirectory)
+param([string]$BasePackageDirectory, [string]$Configuration = 'Release', [string]$OutputDirectory, [string]$PackagesDirectory)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $artifacts = Join-Path $root 'artifacts'
 $packages = if ($OutputDirectory) { [IO.Path]::GetFullPath($OutputDirectory) } else { Join-Path $artifacts 'nuget' }
-if ($BasePackageDirectory) {
-    $BasePackageDirectory = [IO.Path]::GetFullPath($BasePackageDirectory)
-    if (!(Test-Path (Join-Path $BasePackageDirectory 'NuGet.Config'))) {
-        throw "Base package feed is not prepared: $BasePackageDirectory. Run the Base build-package.bat first."
-    }
-}
-& dotnet pack (Join-Path $root 'BaseTemplate\BaseTemplate.csproj') -c $Configuration -o $packages -m:1 -p:UseSharedCompilation=false -p:BuildInParallel=false --nologo
+. (Join-Path $PSScriptRoot 'NuGetPaths.ps1')
+$paths = Resolve-TemplateNuGetPaths -Root $root -BasePackageDirectory $BasePackageDirectory -PackagesDirectory $PackagesDirectory
+$BasePackageDirectory = $paths.FeedDirectory
+Invoke-WithTemplateNuGetFeed -Paths $paths -Action {
+& dotnet pack (Join-Path $root 'BaseTemplate\BaseTemplate.csproj') -c $Configuration -o $packages -m:1 -p:UseSharedCompilation=false -p:BuildInParallel=false "-p:RestoreConfigFile=$($paths.ConfigFile)" "-p:RestorePackagesPath=$($paths.PackagesDirectory)" --nologo
 if ($LASTEXITCODE) { throw 'Template pack failed.' }
 [xml]$project = Get-Content (Join-Path $root 'BaseTemplate\BaseTemplate.csproj')
 $version = [string]$project.Project.PropertyGroup.Version
@@ -50,13 +48,11 @@ if ($BasePackageDirectory -and (Test-Path (Join-Path $BasePackageDirectory 'publ
         }
     }
 }
-$restoreArguments = @('restore', $solution, '--disable-parallel', '-m:1', '-p:BuildInParallel=false')
-if ($BasePackageDirectory) {
-    $restoreArguments += @('--configfile', (Join-Path $BasePackageDirectory 'NuGet.Config'), '--packages', (Join-Path $BasePackageDirectory 'packages'))
-}
+$restoreArguments = @('restore', $solution, '--disable-parallel', '-m:1', '-p:BuildInParallel=false', '--configfile', $paths.ConfigFile, '--packages', $paths.PackagesDirectory)
 & dotnet @restoreArguments
 if ($LASTEXITCODE) { throw 'Generated solution restore failed.' }
 & dotnet build $solution -c $Configuration --no-restore -m:1 -p:BuildInParallel=false -p:UseSharedCompilation=false --nologo
 if ($LASTEXITCODE) { throw 'Generated solution build failed.' }
 Write-Host "Verified package: $package"
 Write-Host "Generated solution: $solution"
+}

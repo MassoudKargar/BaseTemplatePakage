@@ -1,7 +1,9 @@
 [CmdletBinding()]
-param([Parameter(Mandatory=$true)][string]$ProjectDirectory, [Parameter(Mandatory=$true)][string]$BasePackageDirectory)
+param([Parameter(Mandatory=$true)][string]$ProjectDirectory, [Parameter(Mandatory=$true)][string]$BasePackageDirectory, [string]$PackagesDirectory)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
+. (Join-Path $PSScriptRoot 'NuGetPaths.ps1')
+$paths = Resolve-TemplateNuGetPaths -Root $root -BasePackageDirectory $BasePackageDirectory -PackagesDirectory $PackagesDirectory
 $fixture = Join-Path $root ('artifacts\startup-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force $fixture | Out-Null
 $apiDirectory = Join-Path $ProjectDirectory 'src\3.Endpoints\TradingSmoke.Endpoints.API'
@@ -13,7 +15,9 @@ $apiProject = [Security.SecurityElement]::Escape((Join-Path $apiDirectory 'Tradi
 </Project>
 "@ | Set-Content (Join-Path $fixture 'TemplateStartup.csproj') -Encoding utf8
 Copy-Item (Join-Path $PSScriptRoot 'TemplateSmoke.cs') (Join-Path $fixture 'Program.cs')
-& dotnet restore (Join-Path $fixture 'TemplateStartup.csproj') --configfile (Join-Path $BasePackageDirectory 'NuGet.Config') --packages (Join-Path $BasePackageDirectory 'packages') --disable-parallel -m:1
+Invoke-WithTemplateNuGetFeed -Paths $paths -Action {
+& dotnet restore (Join-Path $fixture 'TemplateStartup.csproj') --configfile $paths.ConfigFile --packages $paths.PackagesDirectory --disable-parallel -m:1
 if ($LASTEXITCODE) { throw 'Template startup fixture restore failed.' }
 & dotnet run --project (Join-Path $fixture 'TemplateStartup.csproj') --no-restore -p:UseSharedCompilation=false -p:BuildInParallel=false -- $apiDirectory
 if ($LASTEXITCODE) { throw 'Generated API startup/HTTP smoke failed.' }
+}
