@@ -16,7 +16,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Scalar.AspNetCore" Version="2.18.0" />
-    <PackageReference Include="Base.EndPoints.Web" Version="10.0.0" />
+    <PackageReference Include="Base.EndPoints.Web" Version="10.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\1.Core\BaseTemplate.Core.ApplicationService\BaseTemplate.Core.ApplicationService.csproj" />

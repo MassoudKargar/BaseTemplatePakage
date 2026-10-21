@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Base.Core.Domains" Version="10.0.0" />
+    <PackageReference Include="Base.Core.Domains" Version="10.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseTemplate.Core.Resources\BaseTemplate.Core.Resources.csproj" />

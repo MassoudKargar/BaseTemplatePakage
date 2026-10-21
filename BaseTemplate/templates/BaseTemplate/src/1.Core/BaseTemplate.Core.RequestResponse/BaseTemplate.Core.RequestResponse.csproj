@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Base.Core.Application.Contracts" Version="10.0.0" />
-    <PackageReference Include="Base.Extensions.Translations.Abstractions" Version="10.0.0" />
+    <PackageReference Include="Base.Core.Application.Contracts" Version="10.1.0" />
+    <PackageReference Include="Base.Extensions.Translations.Abstractions" Version="10.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseTemplate.Core.Resources\BaseTemplate.Core.Resources.csproj" />
